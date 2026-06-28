@@ -15,10 +15,13 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'LIVENETTV_PRO_VERSION',       '2.0.0' );
-define( 'LIVENETTV_PRO_PLUGIN_DIR',    plugin_dir_path( __FILE__ ) );
-define( 'LIVENETTV_PRO_PLUGIN_URL',    plugin_dir_url( __FILE__ ) );
+define( 'LIVENETTV_PRO_VERSION',         '2.0.0' );
+define( 'LIVENETTV_PRO_PLUGIN_DIR',      plugin_dir_path( __FILE__ ) );
+define( 'LIVENETTV_PRO_PLUGIN_URL',      plugin_dir_url( __FILE__ ) );
 define( 'LIVENETTV_PRO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+// Shorthand aliases used throughout includes and admin.
+define( 'LIVENETTV_PRO_PATH', LIVENETTV_PRO_PLUGIN_DIR );
+define( 'LIVENETTV_PRO_URL',  LIVENETTV_PRO_PLUGIN_URL );
 
 final class LiveNetTV_Pro {
 
@@ -77,8 +80,7 @@ final class LiveNetTV_Pro {
         new LiveNetTV_Pro_Frontend();
 
         if ( is_admin() ) {
-            $admin = new LiveNetTV_Pro_Admin();
-            $admin->init();
+            new LiveNetTV_Pro_Admin();
         }
     }
 
@@ -120,11 +122,15 @@ final class LiveNetTV_Pro {
 
         $user_id = get_current_user_id();
 
+        $pro_page_id = (int) get_option( 'livenettv_pro_pro_page_id', 0 );
+        $payment_url = $pro_page_id ? get_permalink( $pro_page_id ) : home_url( '/' );
+
         wp_localize_script( 'livenettv-pro-frontend', 'livenettvPro', array(
-            'ajaxUrl'   => admin_url( 'admin-ajax.php' ),
-            'nonce'     => wp_create_nonce( 'livenettv_pro_nonce' ),
-            'isLoggedIn'=> is_user_logged_in(),
-            'isPro'     => $user_id && $this->membership ? $this->membership->is_pro_user( $user_id ) : false,
+            'ajaxUrl'    => admin_url( 'admin-ajax.php' ),
+            'nonce'      => wp_create_nonce( 'livenettv_pro_nonce' ),
+            'isLoggedIn' => is_user_logged_in() ? '1' : '0',
+            'isPro'      => ( $user_id && $this->membership && $this->membership->is_pro_user( $user_id ) ) ? '1' : '0',
+            'paymentUrl' => esc_url( $payment_url ),
             'i18n'      => array(
                 'copied'          => __( 'Copied!', 'livenettv-pro' ),
                 'error'           => __( 'An error occurred. Please try again.', 'livenettv-pro' ),
