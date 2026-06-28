@@ -1,318 +1,315 @@
-/* LiveNetTV Pro Frontend JavaScript */
-(function($) {
+/* LiveNetTV Pro — Frontend JS */
+;(function($) {
     'use strict';
 
     var LNTV = {
+
         init: function() {
-            this.initAuthModal();
-            this.initSubscribeButtons();
-            this.initPaymentForm();
-            this.initFaqAccordion();
-            this.initCopyToClipboard();
-            this.bindEvents();
+            this.modal      = $('#lntv-auth-modal');
+            this.panelLogin = $('#lntv-panel-login');
+            this.panelReg   = $('#lntv-panel-register');
+            this._redirect  = '';
+
+            this.bindSubscribe();
+            this.bindModal();
+            this.bindLoginForm();
+            this.bindRegisterForm();
+            this.bindGoogleLogin();
+            this.bindFaq();
+            this.bindCryptoSelect();
+            this.bindCopyBtn();
+            this.bindFileUpload();
+            this.autoOpenBilling();
         },
 
-        bindEvents: function() {
-            $(document).on('click', '.lntv-faq-question', this.toggleFaq);
-            $(document).on('submit', '.lntv-auth-form', this.handleAuthForm);
-            $(document).on('click', '.lntv-auth-tab', this.switchAuthTab);
-            $(document).on('click', '.lntv-modal-overlay', this.closeModalOnOverlay);
-            $(document).on('click', '.lntv-modal-close', this.closeModal);
-        },
+        // ---- Subscribe buttons ----
+        bindSubscribe: function() {
+            var self = this;
 
-        /* Auth Modal */
-        initAuthModal: function() {
-            // Modal is added via wp_footer hook
-        },
-
-        showAuthModal: function(selectedPlan) {
-            var modal = $('#lntv-auth-modal');
-            if (modal.length) {
-                if (selectedPlan) {
-                    modal.find('input[name="livenettv_selected_plan"]').val(selectedPlan);
-                }
-                modal.addClass('active');
-                $('body').addClass('lntv-modal-open');
-            }
-        },
-
-        closeModal: function(e) {
-            e && e.preventDefault();
-            $('#lntv-auth-modal').removeClass('active');
-            $('body').removeClass('lntv-modal-open');
-            $('.lntv-auth-form input').removeClass('error');
-            $('.lntv-form-error').text('');
-        },
-
-        closeModalOnOverlay: function(e) {
-            if ($(e.target).hasClass('lntv-modal-overlay')) {
-                LNTV.closeModal();
-            }
-        },
-
-        switchAuthTab: function(e) {
-            e.preventDefault();
-            var tab = $(this);
-            var target = tab.data('tab');
-
-            tab.siblings().removeClass('active');
-            tab.addClass('active');
-
-            $('.lntv-auth-panel').removeClass('active');
-            $('#lntv-panel-' + target).addClass('active');
-        },
-
-        handleAuthForm: function(e) {
-            e.preventDefault();
-            var form = $(this);
-            var isLogin = form.hasClass('lntv-login-form');
-            var submitBtn = form.find('button[type="submit"]');
-            var errors = false;
-
-            // Clear previous errors
-            form.find('.lntv-form-error').text('');
-            form.find('input').removeClass('error');
-
-            // Validate
-            var email = form.find('input[name="email"]').val().trim();
-            if (!email) {
-                form.find('input[name="email"]').addClass('error');
-                form.find('.lntv-email-error').text('Email is required');
-                errors = true;
-            } else if (!LNTV.isValidEmail(email)) {
-                form.find('input[name="email"]').addClass('error');
-                form.find('.lntv-email-error').text('Invalid email address');
-                errors = true;
-            }
-
-            if (!isLogin || !form.hasClass('lntv-wp-login')) {
-                var password = form.find('input[name="password"]').val();
-                if (!password || password.length < 6) {
-                    form.find('input[name="password"]').addClass('error');
-                    form.find('.lntv-password-error').text('Password must be at least 6 characters');
-                    errors = true;
-                }
-            }
-
-            // Registration specific
-            if (!isLogin) {
-                var captcha = form.find('input[name="captcha"]').val();
-                if (!captcha) {
-                    form.find('input[name="captcha"]').addClass('error');
-                    form.find('.lntv-captcha-error').text('Please solve the math problem');
-                    errors = true;
-                }
-
-                var terms = form.find('input[name="terms"]');
-                if (terms.length && !terms.is(':checked')) {
-                    form.find('.lntv-terms-error').text('You must agree to the terms');
-                    errors = true;
-                }
-            }
-
-            if (errors) return;
-
-            // Submit
-            submitBtn.prop('disabled', true).html('<span class="lntv-spinner"></span> Processing...');
-
-            var data = {
-                action: isLogin ? 'livenettv_wp_login' : 'livenettv_wp_register',
-                nonce: livenettvPro.nonce,
-                email: email,
-                redirect: form.find('input[name="redirect"]').val() || ''
-            };
-
-            if (isLogin) {
-                data.password = form.find('input[name="password"]').val();
-            } else {
-                data.password = form.find('input[name="password"]').val();
-                data.name = form.find('input[name="name"]').val() || '';
-                data.captcha = form.find('input[name="captcha"]').val();
-                data.captcha_answer = form.find('input[name="captcha_answer"]').val();
-            }
-
-            $.post(livenettvPro.ajaxUrl, data, function(response) {
-                if (response.success) {
-                    if (response.data.redirect) {
-                        window.location.href = response.data.redirect;
-                    } else {
-                        window.location.reload();
-                    }
-                } else {
-                    LNTV.showFormError(form, response.data.message || 'An error occurred');
-                    submitBtn.prop('disabled', false).text(isLogin ? 'Log In' : 'Create Account');
-                }
-            }).fail(function() {
-                submitBtn.prop('disabled', false).text(isLogin ? 'Log In' : 'Create Account');
-                LNTV.showFormError(form, 'A server error occurred');
+            // Guest — open auth modal
+            $(document).on('click', '.lntv-open-auth-modal', function() {
+                var $btn     = $(this);
+                var redirect = $btn.data('redirect') || livenettvPro.paymentUrl;
+                self.openModal(redirect);
             });
-        },
 
-        showFormError: function(form, message) {
-            form.find('.lntv-form-error').last().text(message);
-        },
-
-        isValidEmail: function(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        },
-
-        /* Subscribe Buttons */
-        initSubscribeButtons: function() {
-            $(document).on('click', '.lntv-subscribe-btn', function(e) {
-                e.preventDefault();
+            // Logged-in — show billing form
+            $(document).on('click', '.lntv-show-payment', function() {
                 var plan = $(this).data('plan');
-                if (livenettvPro.isLoggedIn === '1') {
-                    // User is logged in, redirect to payment form
-                    window.location.href = livenettvPro.paymentUrl + '?plan=' + encodeURIComponent(plan);
-                } else {
-                    // Show auth modal
-                    LNTV.showAuthModal(plan);
-                }
+                self.showBilling(plan);
             });
         },
 
-        /* Payment Form */
-        initPaymentForm: function() {
-            var form = $('#lntv-payment-form');
-            if (!form.length) return;
-
-            // Crypto selection
-            $(document).on('click', '.lntv-crypto-option', function() {
-                var option = $(this);
-                var crypto = option.data('crypto');
-                var wallet = option.data('wallet');
-
-                $('.lntv-crypto-option').removeClass('selected');
-                option.addClass('selected');
-
-                $('#lntv_selected_crypto').val(crypto);
-                $('.lntv-wallet-address').text(wallet);
-                $('.lntv-wallet-display').show();
-            });
-
-            // File upload
-            $(document).on('click', '.lntv-file-upload', function() {
-                $(this).find('input[type="file"]').click();
-            });
-
-            $(document).on('change', '.lntv-file-upload input[type="file"]', function() {
-                var input = this;
-                var preview = $('.lntv-file-preview');
-
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        preview.html('<img src="' + e.target.result + '" alt="Preview">');
-                        $preview.show();
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            });
-
-            // Form submission
-            form.on('submit', function(e) {
-                // Basic validation
-                if (!$('#lntv_selected_crypto').val()) {
-                    e.preventDefault();
-                    alert('Please select a payment method');
-                    return false;
-                }
-
-                if (!$('.lntv-file-upload input[type="file"]')[0].files[0]) {
-                    e.preventDefault();
-                    alert('Please upload a payment screenshot');
-                    return false;
-                }
-
-                // Form will submit normally via admin-post.php
-                return true;
-            });
+        // ---- Modal open / close ----
+        openModal: function(redirect) {
+            this._redirect = redirect || '';
+            this.modal.removeAttr('hidden');
+            $('body').addClass('lntv-modal-active');
+            // Reset to login panel
+            this.showPanel('login');
         },
 
-        /* FAQ Accordion */
-        initFaqAccordion: function() {
-            // Already handled via event binding
+        closeModal: function() {
+            this.modal.attr('hidden', '');
+            $('body').removeClass('lntv-modal-active');
+            this.clearErrors();
         },
 
-        toggleFaq: function(e) {
-            e.preventDefault();
-            var item = $(this).closest('.lntv-faq-item');
-            var isActive = item.hasClass('active');
+        bindModal: function() {
+            var self = this;
+            $('#lntv-modal-close, #lntv-modal-overlay').on('click', function() { self.closeModal(); });
+            $(document).on('keydown', function(e) { if (27 === e.keyCode) self.closeModal(); });
+            $('#lntv-goto-register').on('click', function() { self.showPanel('register'); });
+            $('#lntv-goto-login').on('click',    function() { self.showPanel('login'); });
+        },
 
-            // Close all
-            $('.lntv-faq-item').removeClass('active');
+        showPanel: function(which) {
+            if ('login' === which) {
+                this.panelLogin.removeAttr('hidden');
+                this.panelReg.attr('hidden', '');
+            } else {
+                this.panelReg.removeAttr('hidden');
+                this.panelLogin.attr('hidden', '');
+            }
+            this.clearErrors();
+        },
 
-            // Open clicked if it wasn't active
-            if (!isActive) {
-                item.addClass('active');
+        clearErrors: function() {
+            $('.lntv-form-error').attr('hidden', '').text('');
+        },
+
+        showError: function($el, msg) {
+            $el.removeAttr('hidden').text(msg);
+        },
+
+        // ---- Show billing form ----
+        showBilling: function(plan) {
+            var $section = $('#lntv-billing-section');
+            if (!$section.length) return;
+
+            $section.slideDown(300);
+
+            // Pre-select plan radio
+            if (plan) {
+                var $radio = $('[name="livenettv_plan"][value="' + plan + '"]');
+                if ($radio.length) {
+                    $radio.prop('checked', true);
+                    $radio.closest('.lntv-plan-radio').addClass('lntv-plan-radio--selected');
+                }
+            }
+
+            // Scroll to billing section
+            $('html, body').animate({ scrollTop: $section.offset().top - 80 }, 400);
+        },
+
+        // Auto-open billing if ?plan= in URL (user just logged in)
+        autoOpenBilling: function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var plan      = urlParams.get('plan');
+            var section   = $('#lntv-billing-section');
+
+            if (plan && section.length) {
+                this.showBilling(plan);
             }
         },
 
-        /* Copy to Clipboard */
-        initCopyToClipboard: function() {
-            $(document).on('click', '.lntv-copy-btn', function(e) {
+        // ---- Login form ----
+        bindLoginForm: function() {
+            var self = this;
+            $('#lntv-login-form').on('submit', function(e) {
                 e.preventDefault();
-                var btn = $(this);
-                var text = btn.data('copy') || $('.lntv-wallet-address').text();
+                var $form  = $(this);
+                var $btn   = $form.find('button[type="submit"]');
+                var $error = $('#lntv-login-error');
+
+                var log = $.trim($form.find('[name="log"]').val());
+                var pwd = $form.find('[name="pwd"]').val();
+                var terms = $form.find('[type="checkbox"]').is(':checked');
+
+                if (!log || !pwd) {
+                    return self.showError($error, 'Please enter your username and password.');
+                }
+                if (!terms) {
+                    return self.showError($error, 'Please agree to the Terms of Service.');
+                }
+
+                $btn.prop('disabled', true).html('<span class="lntv-spinner"></span> Signing in...');
+                $error.attr('hidden', '');
+
+                $.post(livenettvPro.ajaxUrl, {
+                    action:   'livenettv_wp_login',
+                    nonce:    livenettvPro.nonce,
+                    log:      log,
+                    pwd:      pwd,
+                    redirect: self._redirect
+                }, function(res) {
+                    if (res.success) {
+                        window.location.href = res.data.redirect;
+                    } else {
+                        self.showError($error, res.data.message || 'Login failed.');
+                        $btn.prop('disabled', false).text('Login with Username or Email');
+                    }
+                }).fail(function() {
+                    self.showError($error, 'Server error. Please try again.');
+                    $btn.prop('disabled', false).text('Login with Username or Email');
+                });
+            });
+        },
+
+        // ---- Register form ----
+        bindRegisterForm: function() {
+            var self = this;
+            $('#lntv-register-form').on('submit', function(e) {
+                e.preventDefault();
+                var $form  = $(this);
+                var $btn   = $form.find('button[type="submit"]');
+                var $error = $('#lntv-register-error');
+
+                var username  = $.trim($form.find('[name="user_login"]').val());
+                var email     = $.trim($form.find('[name="user_email"]').val());
+                var pass      = $form.find('[name="user_pass"]').val();
+                var pass2     = $form.find('[name="user_pass2"]').val();
+                var capAnswer = $form.find('[name="captcha_answer"]').val();
+                var capRight  = $form.find('[name="captcha_correct"]').val();
+                var terms     = $form.find('[type="checkbox"]').is(':checked');
+
+                if (!username || !email || !pass) {
+                    return self.showError($error, 'All fields are required.');
+                }
+                if (pass !== pass2) {
+                    return self.showError($error, 'Passwords do not match.');
+                }
+                if (!terms) {
+                    return self.showError($error, 'Please agree to the Terms of Service.');
+                }
+
+                $btn.prop('disabled', true).html('<span class="lntv-spinner"></span> Creating account...');
+                $error.attr('hidden', '');
+
+                $.post(livenettvPro.ajaxUrl, {
+                    action:           'livenettv_wp_register',
+                    nonce:            livenettvPro.nonce,
+                    user_login:       username,
+                    user_email:       email,
+                    user_pass:        pass,
+                    user_pass2:       pass2,
+                    captcha_answer:   capAnswer,
+                    captcha_correct:  capRight,
+                    redirect:         self._redirect
+                }, function(res) {
+                    if (res.success) {
+                        window.location.href = res.data.redirect;
+                    } else {
+                        self.showError($error, res.data.message || 'Registration failed.');
+                        $btn.prop('disabled', false).text('Sign Up');
+                    }
+                }).fail(function() {
+                    self.showError($error, 'Server error. Please try again.');
+                    $btn.prop('disabled', false).text('Sign Up');
+                });
+            });
+        },
+
+        // ---- Google login ----
+        bindGoogleLogin: function() {
+            var self = this;
+            $(document).on('click', '#lntv-google-login-btn', function() {
+                var $btn = $(this);
+                $btn.prop('disabled', true).text('Connecting...');
+
+                $.post(livenettvPro.ajaxUrl, {
+                    action:   'livenettv_get_google_url',
+                    nonce:    livenettvPro.nonce,
+                    redirect: self._redirect
+                }, function(res) {
+                    if (res.success && res.data.auth_url) {
+                        window.location.href = res.data.auth_url;
+                    } else {
+                        $btn.prop('disabled', false).text('Sign in with Google');
+                        alert((res.data && res.data.message) || 'Google Sign-In failed.');
+                    }
+                }).fail(function() {
+                    $btn.prop('disabled', false).text('Sign in with Google');
+                });
+            });
+        },
+
+        // ---- FAQ accordion ----
+        bindFaq: function() {
+            $(document).on('click', '.lntv-faq__q', function() {
+                var $item = $(this).closest('.lntv-faq__item');
+                var open  = $item.hasClass('lntv-faq__item--open');
+                $('.lntv-faq__item').removeClass('lntv-faq__item--open');
+                if (!open) $item.addClass('lntv-faq__item--open');
+            });
+        },
+
+        // ---- Crypto selection → reveal wallet address ----
+        bindCryptoSelect: function() {
+            $(document).on('change', '.lntv-crypto-radios input[type="radio"]', function() {
+                var crypto   = $(this).val();
+                var wallets  = $(this).closest('.lntv-crypto-radios').data('wallets');
+                var address  = wallets && wallets[crypto] ? wallets[crypto] : '';
+                var $display = $('#lntv-wallet-display');
+                var $addr    = $('#lntv-wallet-address');
+
+                if (address) {
+                    $addr.text(address);
+                    $('#lntv-copy-wallet').data('copy', address);
+                    $display.removeAttr('hidden');
+                } else {
+                    $display.attr('hidden', '');
+                }
+            });
+        },
+
+        // ---- Copy wallet address ----
+        bindCopyBtn: function() {
+            $(document).on('click', '.lntv-copy-btn', function() {
+                var $btn = $(this);
+                var text = $btn.data('copy') || $('#lntv-wallet-address').text();
+                if (!text) return;
 
                 if (navigator.clipboard && navigator.clipboard.writeText) {
                     navigator.clipboard.writeText(text).then(function() {
-                        btn.text('Copied!').prop('disabled', true);
-                        setTimeout(function() {
-                            btn.text('Copy').prop('disabled', false);
-                        }, 2000);
+                        $btn.text('Copied!');
+                        setTimeout(function() { $btn.html('<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy'); }, 2000);
                     });
                 } else {
-                    // Fallback
-                    var textarea = $('<textarea>').val(text).appendTo('body');
-                    textarea.select();
+                    var $t = $('<textarea>').val(text).appendTo('body').select();
                     document.execCommand('copy');
-                    textarea.remove();
-                    btn.text('Copied!').prop('disabled', true);
-                    setTimeout(function() {
-                        btn.text('Copy').prop('disabled', false);
-                    }, 2000);
+                    $t.remove();
+                    $btn.text('Copied!');
+                    setTimeout(function() { $btn.text('Copy'); }, 2000);
                 }
             });
-        }
-    };
-
-    /* Google Auth */
-    var LNTVGoogle = {
-        init: function() {
-            $(document).on('click', '#lntv-google-login-btn, .lntv-btn-google', this.handleGoogleLogin);
         },
 
-        handleGoogleLogin: function(e) {
-            e.preventDefault();
-            var btn = $(this);
-            btn.prop('disabled', true).html('<span class="lntv-spinner"></span> Connecting...');
-
-            var plan = $('input[name="livenettv_selected_plan"]').val() || '';
-            var redirect = livenettvPro.paymentUrl + (plan ? '?plan=' + encodeURIComponent(plan) : '');
-
-            $.post(livenettvPro.ajaxUrl, {
-                action: 'livenettv_get_google_auth_url',
-                nonce: livenettvPro.nonce,
-                redirect: redirect
-            }, function(response) {
-                if (response.success && response.data.auth_url) {
-                    window.location.href = response.data.auth_url;
-                } else {
-                    btn.prop('disabled', false).html('<i class="fab fa-google"></i> Continue with Google');
-                    alert(response.data && response.data.message ? response.data.message : 'Failed to connect to Google');
-                }
-            }).fail(function() {
-                btn.prop('disabled', false).html('<i class="fab fa-google"></i> Continue with Google');
-                alert('A server error occurred');
+        // ---- File upload preview ----
+        bindFileUpload: function() {
+            $(document).on('change', '#lntv-screenshot', function() {
+                var file    = this.files && this.files[0];
+                var $prev   = $('#lntv-upload-preview');
+                $prev.empty();
+                if (!file) return;
+                var reader  = new FileReader();
+                reader.onload = function(e) {
+                    $prev.html('<img src="' + e.target.result + '" alt="Preview">');
+                };
+                reader.readAsDataURL(file);
             });
         }
     };
 
-    /* Initialize */
-    $(document).ready(function() {
-        LNTV.init();
-        LNTVGoogle.init();
+    // Plan radio visual feedback
+    $(document).on('change', '.lntv-plan-radio input', function() {
+        $('.lntv-plan-radio').removeClass('lntv-plan-radio--selected');
+        $(this).closest('.lntv-plan-radio').addClass('lntv-plan-radio--selected');
     });
+
+    // Prevent modal close when clicking inside box
+    $(document).on('click', '.lntv-modal__box', function(e) { e.stopPropagation(); });
+
+    $(document).ready(function() { LNTV.init(); });
 
 })(jQuery);
