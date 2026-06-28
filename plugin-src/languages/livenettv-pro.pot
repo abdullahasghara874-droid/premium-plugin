@@ -1,0 +1,364 @@
+# Translation file for LiveNetTV Pro Membership plugin
+# Copyright (C) 2024 LiveNetTV.tools
+# This file is distributed under the GPL v2 or later.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: LiveNetTV Pro Membership 1.0.0\n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Language-Team: LiveNetTV <support@livenettv.tools>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: WordPress\n"
+"X-Domain: livenettv-pro\n"
+
+#: livenettv-pro.php
+msgid "Ad-Free Premium Membership system for LiveNetTV.tools with crypto payments"
+msgstr ""
+
+#: includes/class-membership.php
+msgid "1 Month Pro"
+msgstr ""
+
+msgid "3 Months Pro"
+msgstr ""
+
+msgid "6 Months Pro"
+msgstr ""
+
+msgid "1 Year Pro"
+msgstr ""
+
+msgid "Lifetime Pro"
+msgstr ""
+
+msgid "30 days"
+msgstr ""
+
+msgid "90 days"
+msgstr ""
+
+msgid "6 months"
+msgstr ""
+
+msgid "1 year"
+msgstr ""
+
+msgid "Lifetime"
+msgstr ""
+
+msgid "Free User"
+msgstr ""
+
+msgid "Lifetime Pro Member"
+msgstr ""
+
+#: includes/class-google-auth.php
+msgid "Sign in with Google"
+msgstr ""
+
+msgid "Google Sign-In is not configured."
+msgstr ""
+
+msgid "Authorization failed: No authorization code received."
+msgstr ""
+
+msgid "Authorization failed: Invalid state token."
+msgstr ""
+
+msgid "Failed to connect to Google."
+msgstr ""
+
+msgid "Failed to retrieve user info from Google."
+msgstr ""
+
+msgid "Invalid email address."
+msgstr ""
+
+msgid "Failed to create user account."
+msgstr ""
+
+#: includes/class-emails.php
+msgid "Your Pro Membership is Now Active!"
+msgstr ""
+
+msgid "Payment Request Update"
+msgstr ""
+
+msgid "Your Pro Membership Has Expired"
+msgstr ""
+
+#: includes/class-frontend.php
+msgid "Sign in to get Pro"
+msgstr ""
+
+msgid "You need to sign in with Google to purchase a Pro membership."
+msgstr ""
+
+msgid "Pro Membership Active"
+msgstr ""
+
+msgid "Lifetime Member"
+msgstr ""
+
+msgid "Plan:"
+msgstr ""
+
+msgid "Started:"
+msgstr ""
+
+msgid "Expires:"
+msgstr ""
+
+msgid "days remaining"
+msgstr ""
+
+msgid "Your Benefits"
+msgstr ""
+
+msgid "No popup ads"
+msgstr ""
+
+msgid "No banner ads"
+msgstr ""
+
+msgid "No sticky ads"
+msgstr ""
+
+msgid "No download page ads"
+msgstr ""
+
+msgid "Faster, cleaner browsing"
+msgstr ""
+
+msgid "Payment Under Review"
+msgstr ""
+
+msgid "Your payment is being reviewed by our team. This usually takes 24-48 hours."
+msgstr ""
+
+msgid "Submitted:"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
+
+msgid "You will receive an email notification once your payment is processed."
+msgstr ""
+
+msgid "Get Pro Membership"
+msgstr ""
+
+msgid "Remove all ads and enjoy a faster, cleaner browsing experience."
+msgstr ""
+
+msgid "Select Your Plan"
+msgstr ""
+
+msgid "Choose Payment Method"
+msgstr ""
+
+msgid "Send Payment"
+msgstr ""
+
+msgid "Wallet Address:"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Amount to send:"
+msgstr ""
+
+msgid "Upload Payment Proof"
+msgstr ""
+
+msgid "Click to upload screenshot"
+msgstr ""
+
+msgid "Submit Payment"
+msgstr ""
+
+msgid "Go Pro - Remove Ads"
+msgstr ""
+
+msgid "Pro"
+msgstr "Pro membership label"
+
+msgid "Free"
+msgstr ""
+
+#: includes/class-payment-processor.php
+msgid "You must be logged in to submit a payment."
+msgstr ""
+
+msgid "You already have a pending payment. Please wait for it to be processed."
+msgstr ""
+
+msgid "Invalid plan selected."
+msgstr ""
+
+msgid "Invalid payment method selected."
+msgstr ""
+
+msgid "Transaction ID is required."
+msgstr ""
+
+msgid "Please upload a payment screenshot."
+msgstr ""
+
+msgid "Invalid file type. Please upload JPG, PNG, or GIF images only."
+msgstr ""
+
+msgid "File is too large. Maximum size is 5MB."
+msgstr ""
+
+#: admin/class-admin.php
+msgid "Dashboard"
+msgstr ""
+
+msgid "Payments"
+msgstr ""
+
+msgid "Pro Members"
+msgstr ""
+
+msgid "Google Settings"
+msgstr ""
+
+msgid "Payment Wallets"
+msgstr ""
+
+msgid "Plans & Pricing"
+msgstr ""
+
+msgid "Ad Settings"
+msgstr ""
+
+msgid "Email Settings"
+msgstr ""
+
+msgid "Pro Members"
+msgstr ""
+
+msgid "Pending Payments"
+msgstr ""
+
+msgid "Total Revenue"
+msgstr ""
+
+msgid "From approved payments"
+msgstr ""
+
+msgid "Last 7 Days"
+msgstr ""
+
+msgid "Revenue in last 7 days"
+msgstr ""
+
+msgid "Last 30 Days"
+msgstr ""
+
+msgid "Revenue in last 30 days"
+msgstr ""
+
+msgid "Approved"
+msgstr ""
+
+msgid "Total approved payments"
+msgstr ""
+
+msgid "Rejected"
+msgstr ""
+
+msgid "Total rejected payments"
+msgstr ""
+
+msgid "Quick Actions"
+msgstr ""
+
+msgid "Review Payment"
+msgid_plural "Review Payments"
+msgstr[0] ""
+msgstr[1] ""
+
+msgid "View Pro Members"
+msgstr ""
+
+msgid "Configure Wallets"
+msgstr ""
+
+msgid "Payment Requests"
+msgstr ""
+
+msgid "Payment approved and membership activated successfully."
+msgstr ""
+
+msgid "Payment rejected and user notified."
+msgstr ""
+
+msgid "Payment Details"
+msgstr ""
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Pending Review"
+msgstr ""
+
+msgid "Amount"
+msgstr ""
+
+msgid "Crypto"
+msgstr ""
+
+msgid "TXID"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "days"
+msgstr ""
+
+#: admin/views/payment-detail.php
+msgid "Back to Payments"
+msgstr ""
+
+msgid "Payment Screenshot"
+msgstr ""
+
+msgid "View full size"
+msgstr ""
+
+msgid "No screenshot uploaded."
+msgstr ""
+
+msgid "User Information"
+msgstr ""
+
+msgid "User deleted"
+msgstr ""
+
+msgid "Edit User"
+msgstr ""
+
+msgid "User no longer exists."
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Approve Payment"
+msgstr ""
+
+msgid "Reject Payment"
+msgstr ""
+
+msgid "Reason (optional):"
+msgstr ""
+
+msgid "Explain why the payment is being rejected..."
+msgstr ""

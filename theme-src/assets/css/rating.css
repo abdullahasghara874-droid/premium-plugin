@@ -1,0 +1,132 @@
+.stars-outer {
+    position: relative;
+    display: inline-block;
+    color: #ffd700;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    line-height: 1;
+    width: 5em;
+    white-space: nowrap;
+}
+
+.stars-outer::before {
+    content: "\2605\2605\2605\2605\2605";
+    color: #e0e0e0;
+    display: block;
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.stars-inner::before {
+    content: "\2605\2605\2605\2605\2605";
+    color: #ffd700;
+    display: block;
+}
+
+.stars-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    transition: width 0.2s ease;
+}
+
+.stars-hover::before {
+    content: "\2605\2605\2605\2605\2605";
+    color: #ffd700;
+    display: block;
+    filter: brightness(1.1);
+}
+
+.stars-interact {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 2;
+}
+
+.stars-interact span {
+    flex: 1;
+    height: 100%;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.stars-interact span:hover {
+    transform: scale(1.1);
+}
+
+.rating-info {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.rating-info .avg-val {
+    font-weight: 700;
+    color: #333;
+    margin-right: 5px;
+}
+
+.singlo-star-rating {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 0;
+    min-width: 96px;
+    max-width: 100%;
+    line-height: 1.25;
+}
+
+.singlo-star-rating .ClM7O {
+    font-weight: 600;
+}
+
+.singlo-star-rating .TT9eCd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 56px;
+    white-space: nowrap;
+}
+
+.singlo-star-rating .g1rdde {
+    font-size: 13px;
+    color: #666;
+    white-space: nowrap;
+}
+
+.starblocks {
+    margin-top: -4px;
+    min-height: 22px;
+}
+
+.aap-app-views,
+.singlo-view-count {
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.singlo-meta-views {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}

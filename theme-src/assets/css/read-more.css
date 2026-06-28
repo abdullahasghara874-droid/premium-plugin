@@ -1,0 +1,57 @@
+.post-description {
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: 150px; /* Secure height for ~4-5 lines */
+}
+
+.post-description.expanded {
+    max-height: 5000px; /* Large enough to hold all content but allows transition */
+}
+
+.read-more-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to top, #ffffff, transparent);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.post-description.expanded .read-more-wrapper {
+    position: relative;
+    height: auto;
+    background: none;
+    margin-top: 15px;
+}
+
+.read-more-btn {
+    pointer-events: auto;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1E3A8A;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.read-more-btn:hover {
+    background: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.read-more-btn .line {
+    display: none; /* Hide if not needed, or use for design */
+}

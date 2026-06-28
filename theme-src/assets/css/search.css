@@ -1,0 +1,207 @@
+
+
+    .aap_metatv-search-wrapper {
+        padding: 16px;
+        width: 100%;
+        background: #ffffff;
+    }
+
+    .aap_metatv-search-container {
+        max-width: 720px;
+        margin: 0 auto;
+    }
+
+    .aap_search-input-group {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 2px solid rgba(40, 114, 250, 0.2);
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 6px rgba(40, 114, 250, 0.08);
+    }
+
+    .aap_search-input-group:focus-within {
+        border-color: #2872fa;
+        box-shadow: 0 4px 12px rgba(40, 114, 250, 0.12);
+    }
+
+    .aap_search-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 16px;
+        opacity: 0.8;
+    }
+
+    .aap_search-icon svg {
+        width: 16px;
+        height: 16px;
+        stroke: #2872fa;
+        stroke-width: 2.5;
+    }
+
+    .aap_search-input-group input[type="text"] {
+        flex: 1;
+        height: 44px;
+        padding: 0 16px;
+        border: none;
+        background: none;
+        font-size: 15px;
+        color: #333;
+        font-family: inherit;
+    }
+
+    .aap_search-input-group input[type="text"]:focus {
+        outline: none;
+    }
+
+    .aap_search-input-group input[type="text"]::placeholder {
+        color: #888;
+        transition: color 0.2s ease;
+    }
+
+    .aap_search-input-group input[type="text"]:focus::placeholder {
+        color: #bbb;
+    }
+
+    .aap_clear-input {
+        display: none;
+        background: none;
+        border: none;
+        padding: 8px;
+        cursor: pointer;
+        border-radius: 50%;
+        margin-right: 4px;
+        transition: all 0.2s ease;
+    }
+
+    .aap_clear-input svg {
+        width: 14px;
+        height: 14px;
+        stroke: #999;
+        stroke-width: 2.5;
+        transition: stroke 0.2s ease;
+    }
+
+    .aap_clear-input:hover svg {
+        stroke: #666;
+    }
+
+    .aap_clear-input:hover {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    .aap_search-input-group.aap_has-text .aap_clear-input {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .aap_search-input-group button[type="submit"] {
+        margin: 5px;
+        padding: 0 20px;
+        height: 34px;
+        background: var(--theme-palette-color-1, #2872fa);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 4px rgba(40, 114, 250, 0.2);
+    }
+
+    .aap_search-input-group button[type="submit"]:hover {
+        background: #1e5cd7;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(40, 114, 250, 0.25);
+    }
+
+    .aap_search-history {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+        padding: 0 4px;
+    }
+
+    .aap_search-history > div {
+        font-size: 13px;
+        color: #666;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .aap_search-history > div p {
+        margin: 0;
+    }
+
+    .aap_search-history > div strong {
+        color: #444;
+    }
+
+    .aap_search-history > button {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: none;
+        border: none;
+        color: #666;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s;
+    }
+
+    .aap_search-history > button:hover {
+        background: rgba(40, 114, 250, 0.08);
+        color: #2872fa;
+    }
+
+    .aap_search-history > button svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+        stroke-width: 2;
+    }
+
+    @media (max-width: 768px) {
+        .aap_metatv-search-wrapper {
+            padding: 12px;
+            margin: 0;
+        }
+
+        .aap_search-input-group {
+            border-radius: 10px;
+        }
+
+        .aap_search-input-group input[type="text"] {
+            height: 42px;
+            font-size: 14px;
+        }
+
+        .aap_search-input-group button[type="submit"] {
+            padding: 0 16px;
+            height: 32px;
+            font-size: 13px;
+        }
+
+        .aap_search-icon {
+            margin-left: 14px;
+        }
+
+        .aap_search-icon svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        .aap_search-history > button span {
+            display: none;
+        }
+    }
+    

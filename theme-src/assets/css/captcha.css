@@ -1,0 +1,71 @@
+.comment-form-captcha {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #0073aa
+}
+
+.comment-form-captcha label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333
+}
+
+.captcha-question-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap
+}
+
+.captcha-question {
+    font-size: 18px;
+    font-weight: 700;
+    background: #fff;
+    padding: 8px 15px;
+    border-radius: 4px;
+    border: 2px solid #ddd;
+    color: #333
+}
+
+.captcha-input {
+    width: 80px!important;
+    padding: 8px 12px!important;
+    border: 2px solid #ddd!important;
+    border-radius: 4px!important;
+    font-size: 16px!important;
+    text-align: center
+}
+
+.captcha-input:focus {
+    border-color: #0073aa!important;
+    outline: none!important;
+    box-shadow: 0 0 0 2px rgba(0,115,170,.2)!important
+}
+
+.captcha-loading {
+    animation: pulse 2s infinite
+}
+
+@keyframes pulse {
+    0%,100% {
+        opacity: 1
+    }
+
+    50% {
+        opacity: .7
+    }
+}
+
+@media (max-width: 600px) {
+    .captcha-question-wrapper {
+        flex-direction:column;
+        align-items: flex-start
+    }
+
+    .captcha-input {
+        width: 100px!important
+    }
+}

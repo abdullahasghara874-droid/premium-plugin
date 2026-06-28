@@ -1,0 +1,213 @@
+.wp-block-kadence-advancedbtn.kb-btns3469_161c0d-e6 {
+    padding-top: 2px;
+    padding-right: 2px;
+    padding-bottom: 5px;
+    padding-left: 2px;
+    gap: 0.5rem;
+}
+
+ul.menu .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button {
+    width: initial;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button {
+    color: var(--theme-palette-color-8, #ffffff);
+    background: #0088cc;
+    font-size: 0.875rem;
+    font-weight: bold;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 0px solid;
+    border-right: 0px solid;
+    border-bottom: 0px solid;
+    border-left: 0px solid;
+    padding-top: 0.3em;
+    padding-right: 0.75em;
+    padding-bottom: 0.3em;
+    padding-left: 0.75em;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.kb-btn3469_fff293-a1.kb-button .kb-svg-icon-wrap {
+    font-size: 18px;
+    --kb-button-icon-size: 18px;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button:focus {
+    color: #0088cc;
+    background: var(--theme-palette-color-8, #ffffff);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 0px solid;
+    border-right: 0px solid;
+    border-bottom: 0px solid;
+    border-left: 0px solid;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+@media all and (max-width: 1024px) {
+    .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button {
+        border-top:0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button:focus {
+        border-top:0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button {
+        border-top:0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+
+    .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn3469_fff293-a1.kb-button:focus {
+        border-top: 0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+}
+
+ul.menu .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button {
+    width: initial;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button {
+    color: var(--theme-palette-color-8, #ffffff);
+    background: #cc001c;
+    font-size: 0.875rem;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top: 0px solid;
+    border-right: 0px solid;
+    border-bottom: 0px solid;
+    border-left: 0px solid;
+    padding-top: 0.3em;
+    padding-right: 0.75em;
+    padding-bottom: 0.3em;
+    padding-left: 0.75em;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.kb-btn3469_4310a4-3d.kb-button .kb-svg-icon-wrap {
+    font-size: 18px;
+    --kb-button-icon-size: 18px;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button:focus {
+    color: #cc001c;
+    background: var(--theme-palette-color-8, #ffffff);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-top: 0px solid;
+    border-right: 0px solid;
+    border-bottom: 0px solid;
+    border-left: 0px solid;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+@media all and (max-width: 1024px) {
+    .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button {
+        border-top:0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button:focus {
+        border-top:0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+}
+
+@media all and (max-width: 767px) {
+    .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button {
+        border-top:0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+
+    .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn3469_4310a4-3d.kb-button:focus {
+        border-top: 0px solid;
+        border-right: 0px solid;
+        border-bottom: 0px solid;
+        border-left: 0px solid;
+    }
+}
+
+.wp-block-kadence-advancedbtn.kb-btns1970_1b6dd2-fe {
+    gap: 4px;
+}
+
+ul.menu .wp-block-kadence-advancedbtn .kb-btn1970_0480ae-c7.kb-button {
+    width: initial;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn1970_0480ae-c7.kb-button {
+    color: var(--theme-palette-color-8, #ffffff);
+    background: #27c699;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.kb-btn1970_0480ae-c7.kb-button .kb-svg-icon-wrap {
+    font-size: 25px;
+    --kb-button-icon-size: 25px;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn1970_0480ae-c7.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn1970_0480ae-c7.kb-button:focus {
+    color: var(--theme-palette-color-8, #ffffff);
+    background: #f48a05;
+}
+
+ul.menu .wp-block-kadence-advancedbtn .kb-btn1970_e688c2-8b.kb-button {
+    width: initial;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn1970_e688c2-8b.kb-button {
+    color: var(--theme-palette-color-8, #ffffff);
+    background: #0088cc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.kb-btn1970_e688c2-8b.kb-button .kb-svg-icon-wrap {
+    font-size: 25px;
+    --kb-button-icon-size: 25px;
+}
+
+.wp-block-kadence-advancedbtn .kb-btn1970_e688c2-8b.kb-button:hover, .wp-block-kadence-advancedbtn .kb-btn1970_e688c2-8b.kb-button:focus {
+    color: var(--theme-palette-color-8, #ffffff);
+    background: var(--theme-palette-color-2, #1559ed);
+}
